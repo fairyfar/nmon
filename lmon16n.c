@@ -69,6 +69,8 @@ static char *SccsId = "nmon " VERSION;
 #include <sys/time.h>
 #include <sys/socket.h>
 #include <sys/wait.h>
+#include <semaphore.h>
+#include <sys/mman.h>
 
 /* Windows moved here so they can be cleared when the screen mode changes */
 WINDOW *padwelcome = NULL;
@@ -4249,6 +4251,7 @@ int main(int argc, char **argv)
     long long tmpslab;
     char * slabstr;
     char truncated_command[257]; /* 256 +1 */
+    sem_t *nmon_proc_mm = NULL;
 
 
 #define MAXROWS 256
@@ -4689,14 +4692,23 @@ int main(int argc, char **argv)
 		}
 	}
 	free(open_filename);
-	/* disconnect from terminal */
 	fflush(NULL);
-	if (!debug && (childpid = fork()) != 0) {
-	    if (ralfmode)
-		printf("%d\n", childpid);
-	    exit(0);		/* parent returns OK */
-	}
+
 	if (!debug) {
+	    nmon_proc_mm = mmap(NULL, sizeof(sem_t), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANON, -1, 0);
+	    sem_init(nmon_proc_mm, 1, 0);
+
+	    /* disconnect from terminal */
+	    if ((childpid = fork()) != 0) {
+		sem_wait(nmon_proc_mm);
+		sem_destroy(nmon_proc_mm);
+		munmap(nmon_proc_mm, sizeof(sem_t));
+
+		if (ralfmode)
+		    printf("%d\n", childpid);
+		exit(0);            /* parent returns OK */
+	    }
+
 	    close(0);
 	    if(using_stdout == 0)
 		close(1);
@@ -5013,6 +5025,10 @@ int main(int argc, char **argv)
 	linux_bbbp("lscfg-v", "/usr/sbin/lscfg -v 2>/dev/null", WARNING);
 #endif
 	sleep(1);		/* to get the first stats to cover this one second and avoids divide by zero issues */
+
+	/* Post semaphore */
+	if (nmon_proc_mm != NULL)
+	    sem_post(nmon_proc_mm);
     }
     /* To get the pointers setup */
     /* Was already done earlier, DONT'T switch back here to the old pointer! - switcher(); */

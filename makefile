@@ -1,6 +1,6 @@
 # NOTE: link the curent working copy of the code to lmon.c for compiling
 CFLAGS=-g -O3 -Wall
-LDFLAGS=-lncurses -lm
+LDFLAGS=-lncurses -lm -lpthread
 FILE=lmon.c
 
 #### POWER
