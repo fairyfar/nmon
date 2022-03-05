@@ -1,7 +1,7 @@
 # NOTE: link the curent working copy of the code to lmon.c for compiling
 CFLAGS=-g -O3 -Wall
 LDFLAGS=-lncurses -lm -lpthread
-FILE=lmon.c
+FILE=lmon16n.c
 
 #### POWER
 #### POWER Red Hat Enterprise Linux - RHEL
@@ -219,30 +219,30 @@ nmon_x86_64_ubuntu910:
 nmon_x86_ubuntu910:
 	cc -o nmon_x86_ubuntu910 $(FILE) $(CFLAGS) $(LDFLAGS) -D X86 -D UBUNTU -D PRE_KERNEL_2_6_18
 
-nmon_x86_ubuntu134: lmon.c
+nmon_x86_ubuntu134: $(FILE)
 	cc -o nmon_x86_ubuntu134 $(FILE) $(CFLAGS) $(LDFLAGS) -D X86 -D UBUNTU -D PRE_KERNEL_2_6_18
 
-nmon_x86_ubuntu1404: lmon.c
+nmon_x86_ubuntu1404: $(FILE)
 	cc -o nmon_x86_ubuntu1404 $(FILE) $(CFLAGS) $(LDFLAGS) -D X86 -D UBUNTU
 
-nmon_x86_ubuntu140403: lmon.c
+nmon_x86_ubuntu140403: $(FILE)
 	cc -o nmon_x86_ubuntu140403 $(FILE) $(CFLAGS) $(LDFLAGS) -D X86 -D UBUNTU
 
-nmon_x86_ubuntu140404: lmon.c
+nmon_x86_ubuntu140404: $(FILE)
 	cc -o nmon_x86_ubuntu140404 $(FILE) $(CFLAGS) $(LDFLAGS) -D X86 -D UBUNTU
 
-nmon_x86_ubuntu1410: lmon.c
+nmon_x86_ubuntu1410: $(FILE)
 	cc -o nmon_x86_ubuntu1410 $(FILE) $(CFLAGS) $(LDFLAGS) -D X86 -D UBUNTU
 
-nmon_x86_ubuntu1504: lmon.c
+nmon_x86_ubuntu1504: $(FILE)
 	cc -o nmon_x86_ubuntu1504 $(FILE) $(CFLAGS) $(LDFLAGS) -D X86 -D UBUNTU
 
-nmon_x86_ubuntu1510: lmon.c
+nmon_x86_ubuntu1510: $(FILE)
 	cc -o nmon_x86_ubuntu1510 $(FILE) $(CFLAGS) $(LDFLAGS) -D X86 -D UBUNTU
 
-nmon_AMD64_ubuntu1604: lmon.c
+nmon_AMD64_ubuntu1604: $(FILE)
 	cc -o nmon_AMD64_ubuntu1604 $(FILE) $(CFLAGS) $(LDFLAGS) -D X86 -D UBUNTU
 
-nmon_AMD64_ubuntu1804: lmon.c
+nmon_AMD64_ubuntu1804: $(FILE)
 	cc -o nmon_AMD64_ubuntu1804 $(FILE) $(CFLAGS) $(LDFLAGS) -D X86 -D UBUNTU
 
