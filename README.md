@@ -24,11 +24,30 @@ Set up a semaphore, then `post` semaphore after the child process is initialized
 
 Already fixed.
 
-# 2. Original Project Informations
+# 2. Compile
+
+See the `makefile` file for details.
+
+Many kinds of target platforms are predefined in `makefile`. Please modify `makefile` first to keep only the target platform definitions and delete other definitions.
+
+For example, if you need to compile the `Red Hat 7` platform program, the `makefile` is as follows:
+
+```makefile
+CFLAGS=-g -O3 -Wall
+LDFLAGS=-lncurses -lm -lpthread
+FILE=lmon16n.c
+
+nmon_x86_rhel7: $(FILE)
+	cc -o nmon_x86_rhel7 $(FILE) $(CFLAGS) $(LDFLAGS) -D X86 -D RHEL7
+```
+
+Then, do the `make` command.
+
+# 3. Original Project Informations
 
 Official website for original `nmon` project: [http://nmon.sourceforge.net](http://nmon.sourceforge.net)
 
-# 3. Open Source License
+# 4. Open Source License
 
 GNU General Public License version 3.0 (GPLv3)
 

@@ -26,11 +26,30 @@ linux_bbbp("netstat -r", "/bin/netstat -r 2>/dev/null", WARNING);
 
 已修复。
 
-# 2. 原始项目信息
+# 2. 编译方法
+
+详见`makefile`文件。
+
+`makefile`中预定义了多种目标平台，请先修改`makefile`，仅保留目标平台定义，删除其它定义。
+
+例如，假设需要编译`Red Hat 7`平台程序，则`makefile`如下：
+
+```makefile
+CFLAGS=-g -O3 -Wall
+LDFLAGS=-lncurses -lm -lpthread
+FILE=lmon16n.c
+
+nmon_x86_rhel7: $(FILE)
+	cc -o nmon_x86_rhel7 $(FILE) $(CFLAGS) $(LDFLAGS) -D X86 -D RHEL7
+```
+
+然后，执行`make`命令。
+
+# 3. 原始项目信息
 
 原始`nmon`项目官网：[http://nmon.sourceforge.net](http://nmon.sourceforge.net)
 
-# 3. 开源协议
+# 4. 开源协议
 
 GNU General Public License version 3.0 (GPLv3)
 
