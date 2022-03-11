@@ -2,11 +2,11 @@ This project is used to fix bugs and enhance features for `nmon`.
 
 # 1.Bug Fixes
 
-## 1.1. BUG1: Main process initialization synchronization when `nmon` works in `ralfmode`.
+## 1.1. BUG1: Main process initialization synchronization when `nmon` works in `loging (not cursed) mode`.
 
 ### Problem
 
-When `nmon` works in `ralfmode` (using the parameter `-p`), the main process returns before the child process has completed initialization.
+When `nmon` works in `loging mode` (for example using the parameter `-f` or `-F`), the main process returns before the child process has completed initialization.
 
 In some cases, for example in our docker test environment, the following command takes 20 seconds to return.
 
