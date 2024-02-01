@@ -1,3 +1,5 @@
+[中文](README-中文.md) | [ENGLISH](README.md)
+
 This project is used to fix bugs and enhance features for `nmon`.
 
 # 1.Bug Fixes

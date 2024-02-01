@@ -1,3 +1,5 @@
+[中文](README-中文.md) | [ENGLISH](README.md)
+
 本项目主要用于修复`nmon`的Bug以及增强功能。
 
 # 1. Bug修复
